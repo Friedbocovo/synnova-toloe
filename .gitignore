@@ -1,3 +1,6 @@
+# Images source folder (already copied to public/images)
+synnova/
+
 # Logs
 logs
 *.log

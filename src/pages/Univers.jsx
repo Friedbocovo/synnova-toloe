@@ -1,169 +1,295 @@
 import { Link } from 'react-router-dom'
-import { Mic, Sparkles, Film, Leaf, ArrowRight, Calendar, Users, Globe } from 'lucide-react'
+import { ArrowRight, Mic, Sparkles, Film, Leaf } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import PageWrapper from '../components/PageWrapper'
-import SectionReveal from '../components/SectionReveal'
-
-const univers = [
-  {
-    id: 'animation',
-    icon: <Mic className="w-8 h-8" />,
-    tag: '01',
-    title: 'Animation & Événements',
-    subtitle: 'Animatrice live · Maîtresse de cérémonie',
-    gradient: 'from-pink-500 to-rose-600',
-    accent: 'text-primary',
-    border: 'border-pink-500/30',
-    photo: '/images/4.jpg',
-    desc: "Synnova donne vie aux événements avec une énergie communicative et une présence scénique naturelle. Des festivals aux cérémonies officielles, elle sait captiver une audience et créer des moments mémorables.",
-    items: [
-      { icon: <Calendar size={16} />, text: 'Festival International des Arts du Bénin' },
-      { icon: <Users size={16} />, text: 'Cérémonies officielles & galas' },
-      { icon: <Mic size={16} />, text: 'Animation live & conférences' },
-      { icon: <Globe size={16} />, text: 'Événements culturels & sociaux' },
-    ],
-    cta: 'Me contacter pour un événement',
-  },
-  {
-    id: 'communication',
-    icon: <Sparkles className="w-8 h-8" />,
-    tag: '02',
-    title: 'Communication Digitale',
-    subtitle: 'Stratégie · Création de contenu · Réseaux sociaux',
-    gradient: 'from-purple-500 to-indigo-600',
-    accent: 'text-purple-400',
-    border: 'border-purple-500/30',
-    photo: '/images/20.jpg',
-    desc: "Communicatrice digitale aguerrie, Synnova maîtrise l'art de raconter des histoires sur les réseaux sociaux. Elle crée du contenu engageant, développe des stratégies de communication et accompagne les organisations dans leur présence digitale.",
-    items: [
-      { icon: <Sparkles size={16} />, text: 'Création de contenu social media' },
-      { icon: <Globe size={16} />, text: 'Stratégie de communication digitale' },
-      { icon: <Users size={16} />, text: 'Community management' },
-      { icon: <Mic size={16} />, text: 'Ex-Chargée Communication Mairie des Jeunes' },
-    ],
-    cta: 'Collaborer sur un projet digital',
-  },
-  {
-    id: 'cinema',
-    icon: <Film className="w-8 h-8" />,
-    tag: '03',
-    title: 'Cinéma & Régie',
-    subtitle: 'Actrice · Régisseuse plateau · Production',
-    gradient: 'from-amber-500 to-orange-600',
-    accent: 'text-gold',
-    border: 'border-amber-500/30',
-    photo: '/images/13.jpg',
-    desc: "Formée à l'UCAE, Synnova s'est imposée dans le cinéma béninois comme actrice et régisseuse plateau. Elle a participé à des productions majeures et contribué à la mise en scène d'événements culturels d'envergure nationale.",
-    items: [
-      { icon: <Film size={16} />, text: 'Actrice de cinéma — productions béninoises' },
-      { icon: <Calendar size={16} />, text: 'Régisseuse plateau — Festival des Arts du Bénin' },
-      { icon: <Users size={16} />, text: 'Coordination de productions' },
-      { icon: <Sparkles size={16} />, text: 'Formation UCAE — Arts & Communication' },
-    ],
-    cta: "Discuter d'une collaboration cinéma",
-  },
-  {
-    id: 'entrepreneuriat',
-    icon: <Leaf className="w-8 h-8" />,
-    tag: '04',
-    title: 'Entrepreneuriat Social',
-    subtitle: 'Emballages biodégradables · Éco-responsabilité',
-    gradient: 'from-green-500 to-emerald-600',
-    accent: 'text-green-400',
-    border: 'border-green-500/30',
-    photo: '/images/27.jpg',
-    desc: "Militante pour un Bénin plus vert, Synnova crée et confectionne des emballages biodégradables. Une initiative entrepreneuriale qui répond à un enjeu environnemental concret tout en créant de la valeur économique locale.",
-    items: [
-      { icon: <Leaf size={16} />, text: "Création d'emballages 100% biodégradables" },
-      { icon: <Globe size={16} />, text: 'Impact environnemental positif' },
-      { icon: <Users size={16} />, text: 'Entrepreneuriat social & communautaire' },
-      { icon: <Sparkles size={16} />, text: 'Innovation éco-responsable africaine' },
-    ],
-    cta: 'En savoir plus sur les emballages bio',
-  },
-]
+import { useApp } from '../context/AppContext'
 
 export default function Univers() {
+  const { t, theme } = useApp()
+
+  // Enable scroll snap on mount, disable on unmount
+  useEffect(() => {
+    document.body.classList.add('snap-scroll')
+    return () => {
+      document.body.classList.remove('snap-scroll')
+    }
+  }, [])
+
+  const universIcons = [
+    <Mic className="w-8 h-8" />,
+    <Sparkles className="w-8 h-8" />,
+    <Film className="w-8 h-8" />,
+    <Leaf className="w-8 h-8" />,
+  ]
+
+  const universPhotos = [
+    '/images/h24.webp',
+    '/images/h12.webp',
+    '/images/24.webp',
+    '/images/h65.webp',
+  ]
+
+  const universGradients = [
+    'from-primary to-pink-600',
+    'from-purple-500 to-indigo-600',
+    'from-amber-500 to-orange-600',
+    'from-green-500 to-emerald-600',
+  ]
+
   return (
     <PageWrapper>
-      {/* HERO */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      {/* Hero Section - Cinematic Full Screen */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden snap-section">
+        {/* Background Image */}
         <div className="absolute inset-0">
-          <img src="/images/6.jpg" alt="Mes univers" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-950/80 via-gray-950/70 to-gray-950" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(249,168,37,0.15),transparent_50%)]" />
+          <img 
+            src="/images/uni1.webp" 
+            alt="Mes Univers" 
+            className="w-full h-full object-cover object-center" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <SectionReveal>
-            <span className="inline-block px-4 py-1.5 bg-gold/20 border border-gold/40 rounded-full text-gold text-xs font-semibold tracking-wider uppercase mb-6">
-              Mes Univers
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Ce que je fais
-            </h1>
-            <p className="text-gray-200 text-lg sm:text-xl max-w-3xl leading-relaxed">
-              Quatre univers distincts, une même vision : créer de l'impact, raconter des histoires et contribuer à un monde meilleur.
-            </p>
-          </SectionReveal>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="inline-block px-5 py-2 bg-primary/20 backdrop-blur-sm border border-primary/50 rounded-full text-primary text-sm font-semibold tracking-widest uppercase mb-8"
+            >
+              {t.univers.badge}
+            </motion.span>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="font-display text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight" 
+              style={{ fontFamily: 'Itim, cursive', color: '#ffffff' }}
+            >
+              {t.univers.title}
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-gray-100 text-xl sm:text-2xl max-w-3xl mx-auto leading-relaxed font-light"
+            >
+              {t.univers.intro}
+            </motion.p>
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        >
+          <span className="text-white/70 text-xs tracking-widest uppercase">Explorer</span>
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="w-[2px] h-16 bg-gradient-to-b from-primary to-transparent"
+          />
+        </motion.div>
       </section>
 
-      {/* UNIVERS */}
-      <section className="py-20 bg-gray-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {univers.map((u, i) => (
-            <SectionReveal key={u.id} delay={0.1}>
-              <div className={`rounded-3xl border ${u.border} bg-gray-900 overflow-hidden`}>
-                <div className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
-                  {/* Photo */}
-                  <div className="lg:w-2/5 aspect-video lg:aspect-auto overflow-hidden relative">
-                    <img
-                      src={u.photo}
-                      alt={u.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 min-h-64"
+      {/* Univers Sections - Full Screen Cinematic */}
+      {t.univers.items.map((item, i) => (
+        <section 
+          key={item.tag} 
+          className="relative min-h-screen flex items-center overflow-hidden snap-section border-t-2"
+          style={{ 
+            backgroundColor: theme === 'dark' 
+              ? (i % 2 === 0 ? 'var(--bg)' : 'var(--bg-card)')
+              : (i % 2 === 0 ? '#e8eaed' : '#f5f5f5'),
+            borderColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.12)'
+          }}
+        >
+          {/* Background Image with Parallax */}
+          <motion.div 
+            className="absolute inset-0"
+            style={{ opacity: theme === 'dark' ? 0.08 : 0.15 }}
+            initial={{ scale: 1.2, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: theme === 'dark' ? 0.08 : 0.15 }}
+            transition={{ duration: 1.5 }}
+            viewport={{ once: true }}
+          >
+            <img 
+              src={universPhotos[i]} 
+              alt={item.title}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+            <div className={`grid lg:grid-cols-2 gap-16 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              {/* Image Side */}
+              <motion.div
+                initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
+                className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}
+              >
+                <div className="relative group">
+                  {/* Decorative Gradient Glow */}
+                  <div className={`absolute -inset-4 bg-gradient-to-br ${universGradients[i]} opacity-20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500`} />
+                  
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={universPhotos[i]} 
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${u.gradient} opacity-30`} />
-                    <div className="absolute bottom-4 left-4">
-                      <span className="font-display text-5xl font-black text-white/20">{u.tag}</span>
+                    
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${universGradients[i]} opacity-20`} />
+                    
+                    {/* Number Badge */}
+                    <div className="absolute top-6 left-6 w-16 h-16 rounded-xl bg-black/60 backdrop-blur-md flex items-center justify-center">
+                      <span className="text-white text-2xl font-bold" style={{ fontFamily: 'Itim, cursive' }}>
+                        {item.tag}
+                      </span>
                     </div>
-                  </div>
-                  {/* Content */}
-                  <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center">
-                    <div className={`inline-flex items-center gap-2 ${u.accent} mb-4`}>
-                      {u.icon}
-                      <span className="text-xs font-semibold tracking-widest uppercase">{u.title}</span>
+
+                    {/* Icon Badge */}
+                    <div className="absolute bottom-6 right-6 w-14 h-14 rounded-xl bg-black/60 backdrop-blur-md flex items-center justify-center text-white">
+                      {universIcons[i]}
                     </div>
-                    <h2 className="font-display text-2xl sm:text-3xl font-bold text-white mb-1">{u.title}</h2>
-                    <p className="text-gray-500 text-sm mb-5">{u.subtitle}</p>
-                    <p className="text-gray-300 leading-relaxed mb-8 text-base">{u.desc}</p>
-                    <ul className="space-y-3 mb-8">
-                      {u.items.map((item, j) => (
-                        <li key={j} className="flex items-center gap-3 text-gray-400 text-sm">
-                          <span className={`${u.accent} flex-shrink-0`}>{item.icon}</span>
-                          {item.text}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link to="/contact" className="btn-primary self-start">
-                      {u.cta} <ArrowRight size={16} />
-                    </Link>
                   </div>
                 </div>
-              </div>
-            </SectionReveal>
-          ))}
-        </div>
-      </section>
+              </motion.div>
 
-      {/* CTA */}
-      <section className="py-16 bg-gray-950">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <SectionReveal>
-            <h2 className="font-display text-3xl font-bold text-white mb-4">Voir mes réalisations</h2>
-            <p className="text-gray-400 mb-8">Photos, événements, productions — tout ce que j'ai accompli</p>
-            <Link to="/portfolio" className="btn-primary">
-              Portfolio & Galerie <ArrowRight size={18} />
-            </Link>
-          </SectionReveal>
+              {/* Content Side */}
+              <motion.div
+                initial={{ opacity: 0, x: i % 2 === 0 ? 100 : -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
+                className={`${i % 2 === 1 ? 'lg:order-1' : ''}`}
+              >
+                {/* Icon */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.4, type: "spring" }}
+                  viewport={{ once: true }}
+                  className="mb-6"
+                >
+                  <div className={`inline-flex w-16 h-16 rounded-xl bg-gradient-to-br ${universGradients[i]} items-center justify-center text-white shadow-lg`}>
+                    {universIcons[i]}
+                  </div>
+                </motion.div>
+
+                <h2 
+                  className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight" 
+                  style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}
+                >
+                  {item.title}
+                </h2>
+                
+                <p className="text-primary text-lg font-semibold mb-6 tracking-wide">
+                  {item.subtitle}
+                </p>
+                
+                <div className="w-20 h-1 bg-gradient-to-r from-primary to-purple-500 mb-8 rounded-full" />
+                
+                <p 
+                  className="text-lg sm:text-xl leading-relaxed mb-10" 
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {item.desc}
+                </p>
+
+                {/* CTA Button */}
+                <Link 
+                  to="/contact" 
+                  className={`inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r ${universGradients[i]} text-white text-lg font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300`}
+                >
+                  {item.cta}
+                  <ArrowRight size={20} />
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* CTA Section - Portfolio */}
+      <section 
+        className="relative py-32 overflow-hidden snap-section min-h-screen flex items-center border-t-2" 
+        style={{ 
+          backgroundColor: theme === 'dark' ? 'var(--bg)' : '#e8eaed',
+          borderColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.12)'
+        }}
+      >
+        <div className="absolute inset-0">
+          <img 
+            src="/images/hero.png" 
+            alt="Background"
+            className="w-full h-full object-cover"
+            style={{ opacity: theme === 'dark' ? 0.05 : 0.08 }}
+          />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-4 text-center w-full">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative p-16 rounded-3xl backdrop-blur-sm border-2 overflow-hidden shadow-xl"
+              style={{
+                backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.9)',
+                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.15)'
+              }}
+            >
+              {/* Animated Gradient Background */}
+              <motion.div
+                animate={{
+                  background: [
+                    'radial-gradient(circle at 0% 0%, rgba(194, 24, 91, 0.1) 0%, transparent 50%)',
+                    'radial-gradient(circle at 100% 100%, rgba(194, 24, 91, 0.1) 0%, transparent 50%)',
+                    'radial-gradient(circle at 0% 0%, rgba(194, 24, 91, 0.1) 0%, transparent 50%)',
+                  ]
+                }}
+                transition={{ duration: 10, repeat: Infinity }}
+                className="absolute inset-0"
+              />
+
+              <div className="relative">
+                <h2 
+                  className="text-5xl sm:text-6xl font-bold mb-6" 
+                  style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}
+                >
+                  {t.univers.portfolioCta}
+                </h2>
+                <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+                  {t.univers.portfolioDesc}
+                </p>
+                
+                <Link 
+                  to="/portfolio" 
+                  className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-primary to-purple-500 text-white text-lg font-semibold rounded-full hover:shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300"
+                >
+                  {t.univers.portfolioCta}
+                  <ArrowRight size={24} />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </PageWrapper>

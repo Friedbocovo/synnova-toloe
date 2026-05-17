@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Facebook, Instagram, Linkedin, Send, CheckCircle } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, ArrowRight, MapPin, Mail, Phone } from 'lucide-react'
+import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper'
-import SectionReveal from '../components/SectionReveal'
+import { useApp } from '../context/AppContext'
 
 const TikTokIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -16,216 +17,296 @@ const socials = [
   { href: 'https://linkedin.com/in/synnova-tocloe', icon: <Linkedin size={20} />, label: 'LinkedIn', handle: 'Synnova Tocloe' },
 ]
 
-const demandes = [
-  'Animation d\'événement',
-  'Collaboration cinéma',
-  'Communication digitale',
-  'Emballages biodégradables',
-  'Partenariat',
-  'Autre',
-]
-
 export default function Contact() {
+  const { t, theme } = useApp()
+  const f = t.contact.form
   const [form, setForm] = useState({ prenom: '', nom: '', email: '', demande: '', message: '' })
-  const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const validate = () => {
-    const e = {}
-    if (!form.prenom.trim()) e.prenom = 'Prénom requis'
-    if (!form.nom.trim()) e.nom = 'Nom requis'
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email valide requis'
-    if (!form.demande) e.demande = 'Veuillez choisir un type de demande'
-    if (!form.message.trim() || form.message.length < 20) e.message = 'Message trop court (min. 20 caractères)'
-    return e
-  }
-
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
-    if (errors[e.target.name]) setErrors(prev => ({ ...prev, [e.target.name]: '' }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const e2 = validate()
-    if (Object.keys(e2).length > 0) { setErrors(e2); return }
     setLoading(true)
-    setTimeout(() => {
+    setTimeout(() => { 
       setLoading(false)
       setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 5000)
     }, 1500)
   }
 
   return (
     <PageWrapper>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(194,24,91,0.12),transparent_50%)]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal>
-            <span className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/30 rounded-full text-primary text-xs font-semibold tracking-wider uppercase mb-6">
-              Contact
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Travaillons ensemble
-            </h1>
-            <p className="text-gray-300 text-lg sm:text-xl max-w-2xl leading-relaxed">
-              Un projet, une idée, une collaboration ? Je suis à l'écoute. Écrivez-moi et construisons quelque chose de beau.
-            </p>
-          </SectionReveal>
+      {/* Hero Section - Cinematic */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="/images/h3.webp" 
+            alt="Contact" 
+            className="w-full h-full object-cover object-center" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         </div>
+        
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="inline-block px-5 py-2 bg-primary/20 backdrop-blur-sm border border-primary/50 rounded-full text-primary text-sm font-semibold tracking-widest uppercase mb-8"
+            >
+              {t.contact.badge}
+            </motion.span>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="font-display text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight" 
+              style={{ fontFamily: 'Itim, cursive', color: '#ffffff' }}
+            >
+              {t.contact.title}
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-gray-100 text-xl sm:text-2xl max-w-3xl mx-auto leading-relaxed font-light"
+            >
+              {t.contact.subtitle}
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        >
+          <span className="text-white/70 text-xs tracking-widest uppercase">Contact</span>
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="w-[2px] h-16 bg-gradient-to-b from-primary to-transparent"
+          />
+        </motion.div>
       </section>
 
-      {/* Formulaire + Réseaux */}
-      <section className="py-20 bg-gray-950">
+      {/* Contact Form & Info Section */}
+      <section 
+        className="py-20" 
+        style={{ backgroundColor: theme === 'dark' ? 'var(--bg)' : '#f8f9fa' }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-
-            {/* Formulaire */}
-            <div className="lg:col-span-3">
-              <SectionReveal>
-                {submitted ? (
-                  <div className="card-dark flex flex-col items-center justify-center py-20 text-center">
-                    <CheckCircle className="w-16 h-16 text-green-400 mb-6" />
-                    <h2 className="font-display text-2xl font-bold text-white mb-3">Message envoyé !</h2>
-                    <p className="text-gray-400 max-w-sm">
-                      Merci pour votre message. Synnova vous répondra dans les plus brefs délais.
-                    </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              {submitted ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-20 text-center"
+                >
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                    <ArrowRight className="w-10 h-10 text-primary" />
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} noValidate className="card-dark space-y-6">
-                    <h2 className="font-display text-2xl font-bold text-white mb-2">Envoyez un message</h2>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Prénom */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="prenom">Prénom</label>
-                        <input
-                          id="prenom"
-                          name="prenom"
-                          type="text"
-                          value={form.prenom}
-                          onChange={handleChange}
-                          placeholder="Votre prénom"
-                          className={`w-full bg-gray-800 border rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${errors.prenom ? 'border-red-500' : 'border-gray-700 focus:border-primary'}`}
-                        />
-                        {errors.prenom && <p className="text-red-400 text-xs mt-1">{errors.prenom}</p>}
-                      </div>
-                      {/* Nom */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="nom">Nom</label>
-                        <input
-                          id="nom"
-                          name="nom"
-                          type="text"
-                          value={form.nom}
-                          onChange={handleChange}
-                          placeholder="Votre nom"
-                          className={`w-full bg-gray-800 border rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${errors.nom ? 'border-red-500' : 'border-gray-700 focus:border-primary'}`}
-                        />
-                        {errors.nom && <p className="text-red-400 text-xs mt-1">{errors.nom}</p>}
-                      </div>
-                    </div>
-
-                    {/* Email */}
+                  <h2 
+                    className="text-3xl font-bold mb-4" 
+                    style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}
+                  >
+                    {f.success}
+                  </h2>
+                  <p className="text-lg max-w-md" style={{ color: 'var(--text-muted)' }}>
+                    {f.successDesc}
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="email">Email</label>
+                      <label className="block text-sm font-semibold mb-2 text-primary">
+                        {f.prenom}
+                      </label>
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={form.email}
+                        name="prenom"
+                        type="text"
+                        value={form.prenom}
                         onChange={handleChange}
-                        placeholder="votre@email.com"
-                        className={`w-full bg-gray-800 border rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${errors.email ? 'border-red-500' : 'border-gray-700 focus:border-primary'}`}
+                        placeholder={f.placeholder.prenom}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:border-primary focus:outline-none"
+                        style={{
+                          backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                          borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                          color: 'var(--text)'
+                        }}
                       />
-                      {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                     </div>
-
-                    {/* Type de demande */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="demande">Type de demande</label>
-                      <select
-                        id="demande"
-                        name="demande"
-                        value={form.demande}
+                      <label className="block text-sm font-semibold mb-2 text-primary">
+                        {f.nom}
+                      </label>
+                      <input
+                        name="nom"
+                        type="text"
+                        value={form.nom}
                         onChange={handleChange}
-                        className={`w-full bg-gray-800 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${errors.demande ? 'border-red-500 text-gray-400' : 'border-gray-700 focus:border-primary'} ${form.demande ? 'text-white' : 'text-gray-500'}`}
-                      >
-                        <option value="" disabled>Choisissez un type de demande</option>
-                        {demandes.map(d => <option key={d} value={d} className="text-white bg-gray-800">{d}</option>)}
-                      </select>
-                      {errors.demande && <p className="text-red-400 text-xs mt-1">{errors.demande}</p>}
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="message">Message</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={5}
-                        value={form.message}
-                        onChange={handleChange}
-                        placeholder="Décrivez votre projet ou votre demande..."
-                        className={`w-full bg-gray-800 border rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-gray-700 focus:border-primary'}`}
+                        placeholder={f.placeholder.nom}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:border-primary focus:outline-none"
+                        style={{
+                          backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                          borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                          color: 'var(--text)'
+                        }}
                       />
-                      {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                     </div>
-
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {loading ? 'Envoi en cours...' : 'Envoyer le message'}
-                      <Send size={16} />
-                    </button>
-                  </form>
-                )}
-              </SectionReveal>
-            </div>
-
-            {/* Réseaux sociaux */}
-            <div className="lg:col-span-2 space-y-6">
-              <SectionReveal delay={0.2}>
-                <div className="card-dark">
-                  <h3 className="font-display text-xl font-bold text-white mb-6">Suivez mon quotidien</h3>
-                  <p className="text-gray-400 text-sm mb-6">
-                    Retrouvez-moi sur TikTok & Instagram pour suivre mes aventures au quotidien.
-                  </p>
-                  <div className="space-y-3">
-                    {socials.map(({ href, icon, label, handle }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-3 rounded-xl bg-gray-800 hover:bg-gray-700 hover:border-primary/30 border border-transparent transition-all duration-300 group"
-                      >
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                          {icon}
-                        </div>
-                        <div>
-                          <p className="text-white text-sm font-medium">{label}</p>
-                          <p className="text-gray-500 text-xs">{handle}</p>
-                        </div>
-                      </a>
-                    ))}
                   </div>
-                </div>
-              </SectionReveal>
 
-              <SectionReveal delay={0.3}>
-                <div className="card-dark bg-gradient-to-br from-primary/10 to-gold/5 border-primary/20">
-                  <p className="font-script text-2xl text-primary mb-3">Grand-Popo, Bénin</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Synnova est basée à Grand-Popo et intervient sur tout le territoire béninois et au-delà.
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-primary">
+                      {f.email}
+                    </label>
+                    <input
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder={f.placeholder.email}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:border-primary focus:outline-none"
+                      style={{
+                        backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                        color: 'var(--text)'
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-primary">
+                      {f.demande}
+                    </label>
+                    <select
+                      name="demande"
+                      value={form.demande}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:border-primary focus:outline-none"
+                      style={{
+                        backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                        color: 'var(--text)'
+                      }}
+                    >
+                      <option value="">{f.placeholder.demande}</option>
+                      {f.types.map(type => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-primary">
+                      {f.message}
+                    </label>
+                    <textarea
+                      name="message"
+                      rows={6}
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder={f.placeholder.message}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:border-primary focus:outline-none resize-none"
+                      style={{
+                        backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                        color: 'var(--text)'
+                      }}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-purple-500 text-white text-lg font-semibold rounded-full hover:shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? f.sending : f.send}
+                    <ArrowRight size={20} />
+                  </button>
+                </form>
+              )}
+            </motion.div>
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              {/* Location */}
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white flex-shrink-0">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}>
+                    {t.contact.location}
+                  </h3>
+                  <p className="text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                    {t.contact.locationDesc}
                   </p>
                 </div>
-              </SectionReveal>
-            </div>
+              </div>
+
+              {/* Social Media */}
+              <div>
+                <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}>
+                  {t.contact.social}
+                </h3>
+                <div className="space-y-4">
+                  {socials.map(({ href, icon, label, handle }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-300 hover:border-primary hover:shadow-lg group"
+                      style={{
+                        backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff',
+                        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
+                      }}
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        {icon}
+                      </div>
+                      <div>
+                        <p className="font-semibold" style={{ color: 'var(--text)' }}>{label}</p>
+                        <p className="text-sm text-primary">{handle}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

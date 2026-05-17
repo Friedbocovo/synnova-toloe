@@ -16,7 +16,7 @@ export default {
       },
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
-        script: ['"Dancing Script"', 'cursive'],
+        script: ['Itim', 'cursive'],
         body: ['Inter', 'sans-serif'],
       },
       animation: {

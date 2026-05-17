@@ -7,9 +7,112 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-body bg-gray-950 text-gray-100 antialiased;
+    @apply font-body antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  /* Thème sombre (défaut) */
+  :root {
+    --bg: #030712;
+    --bg-card: #111827;
+    --bg-card2: #1f2937;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border: #1f2937;
+    --border-hover: rgba(194,24,91,0.4);
+  }
+
+  /* Thème clair */
+  html.light {
+    --bg: #fdf8f8;
+    --bg-card: #ffffff;
+    --bg-card2: #f5eef0;
+    --text: #1a0a0f;
+    --text-muted: #6b4c55;
+    --border: #e8d5da;
+    --border-hover: rgba(194,24,91,0.4);
+  }
+
+  html.light body {
+    background-color: var(--bg);
+    color: var(--text);
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-semibold text-sm tracking-wide hover:bg-pink-700 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 rounded-full font-semibold text-sm tracking-wide hover:bg-primary hover:text-white transition-all duration-300;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-gold to-primary-light bg-clip-text text-transparent;
+  }
+  .card-dark {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-2xl p-6 transition-all duration-300;
+  }
+  .card-dark:hover {
+    border-color: var(--border-hover);
+  }
+  /* Textes adaptatifs */
+  .text-adaptive {
+    color: var(--text);
+  }
+  .text-adaptive-muted {
+    color: var(--text-muted);
+  }
+  .bg-adaptive {
+    background-color: var(--bg);
+  }
+  .bg-adaptive-card {
+    background-color: var(--bg-card);
+  }
+  .border-adaptive {
+    border-color: var(--border);
+  }
+}
+
+/* Sections background adaptatif */
+html.light section {
+  background-color: var(--bg) !important;
+}
+html.light .bg-gray-900,
+html.light .bg-gray-950 {
+  background-color: var(--bg) !important;
+}
+html.light .bg-gray-800 {
+  background-color: var(--bg-card2) !important;
+}
+html.light .text-gray-400,
+html.light .text-gray-300,
+html.light .text-gray-200 {
+  color: var(--text-muted) !important;
+}
+html.light .text-white {
+  color: var(--text) !important;
+}
+html.light .border-gray-800,
+html.light .border-gray-700 {
+  border-color: var(--border) !important;
+}
+html.light .bg-gray-900\/98,
+html.light .bg-gray-950\/95,
+html.light .bg-gray-950\/98 {
+  background-color: rgba(249,250,251,0.98) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #C2185B; border-radius: 3px; }
+
 
 @layer components {
   .btn-primary {
@@ -50,4 +153,210 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 400ms, transform 400ms;
+}
+
+/* Thème clair — cards carousel visibles */
+html.light .shadow-2xl {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
+}
+html.light .rounded-lg {
+  border: 1px solid var(--border) !important;
+}
+
+/* Floating label input */
+.float-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+.float-field input,
+.float-field textarea,
+.float-field select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  padding: 1.25rem 0 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+.float-field input:focus,
+.float-field textarea:focus,
+.float-field select:focus {
+  border-bottom-color: #C2185B;
+}
+.float-field label {
+  position: absolute;
+  top: 1.1rem;
+  left: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.float-field input:focus ~ label,
+.float-field input:not(:placeholder-shown) ~ label,
+.float-field textarea:focus ~ label,
+.float-field textarea:not(:placeholder-shown) ~ label,
+.float-field select:focus ~ label,
+.float-field.has-value ~ label,
+.float-field select:not([value=""]) ~ label {
+  top: 0;
+  font-size: 0.7rem;
+  color: #C2185B;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.float-field .float-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #C2185B;
+  transition: width 0.3s ease;
+}
+.float-field input:focus ~ .float-line,
+.float-field textarea:focus ~ .float-line,
+.float-field select:focus ~ .float-line {
+  width: 100%;
+}
+
+/* ===== THÈME CLAIR — corrections globales ===== */
+html.light section {
+  background-color: var(--bg) !important;
+}
+html.light .bg-gray-900,
+html.light .bg-gray-950 {
+  background-color: var(--bg) !important;
+}
+html.light .bg-gray-800 {
+  background-color: var(--bg-card2) !important;
+}
+/* Textes */
+html.light .text-gray-400,
+html.light .text-gray-300,
+html.light .text-gray-200,
+html.light .text-gray-500 {
+  color: var(--text-muted) !important;
+}
+html.light .text-white {
+  color: var(--text) !important;
+}
+html.light .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+/* Bordures */
+html.light .border-gray-800,
+html.light .border-gray-700,
+html.light .border-gray-600 {
+  border-color: var(--border) !important;
+}
+/* Navbar */
+html.light .bg-gray-950\/95,
+html.light .bg-gray-950\/98,
+html.light .bg-gray-900\/98 {
+  background-color: rgba(253,248,248,0.97) !important;
+}
+/* Cards */
+html.light .card-dark {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 2px 16px rgba(194,24,91,0.06) !important;
+}
+/* Inputs sombres */
+html.light .bg-gray-800 input,
+html.light input.bg-gray-800,
+html.light select.bg-gray-800,
+html.light textarea.bg-gray-800 {
+  background-color: var(--bg-card2) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+/* Boutons outline */
+html.light .btn-outline {
+  border-color: #C2185B !important;
+  color: #C2185B !important;
+}
+html.light .btn-outline:hover {
+  background-color: #C2185B !important;
+  color: white !important;
+}
+/* Bouton outline blanc sur mobile */
+@media (max-width: 767px) {
+  .btn-outline {
+    color: white !important;
+  }
+  /* Thème blanc sur mobile - couleurs d'origine pour Synnova et Me contacter */
+  html.light .btn-outline {
+    color: #C2185B !important;
+  }
+  html.light .hero-title-synnova {
+    color: #C2185B !important;
+  }
+  html.light .hero-subtitle {
+    color: white !important;
+  }
+  html.light .hero-description {
+    color: black !important;
+    font-weight: 700 !important;
+  }
+  html.light .btn-primary {
+    color: white !important;
+  }
+  /* Thème noir sur mobile - description en rose et gras */
+  .hero-description {
+    color: #C2185B !important;
+    font-weight: 700 !important;
+  }
+}
+/* Carousel cards */
+html.light .shadow-2xl {
+  box-shadow: 0 8px 32px rgba(194,24,91,0.12) !important;
+}
+/* Gradient text visible sur fond clair */
+html.light .gradient-text {
+  background: linear-gradient(to right, #C2185B, #F9A825, #F8BBD0) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+/* Section hero texte visible */
+html.light .font-script {
+  color: var(--text-muted) !important;
+}
+
+/* Logo Synnova — couleur fixe sur les deux thèmes */
+html.light a.font-script,
+html.light .logo-synnova {
+  color: #C2185B !important;
+}
+
+/* Logo toujours en couleur primaire */
+html.light .font-script {
+  color: #C2185B !important;
+}
+
+/* Scroll Snap for About Page - Cinematic Effect */
+body.snap-scroll {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body.snap-scroll section.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Smooth scrolling for all pages */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Force white color for About page story titles */
+.about-story-title {
+  color: #ffffff !important;
 }
