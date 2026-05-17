@@ -31,6 +31,14 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
+    
+    // Créer le contenu de l'email
+    const subject = `${form.demande} - ${form.prenom} ${form.nom}`
+    const body = `Nom: ${form.nom}%0D%0APrénom: ${form.prenom}%0D%0AEmail: ${form.email}%0D%0ADemande: ${form.demande}%0D%0A%0D%0AMessage:%0D%0A${form.message}`
+    
+    // Ouvrir le client email avec les informations pré-remplies
+    window.location.href = `mailto:synnovatocloe@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`
+    
     setTimeout(() => { 
       setLoading(false)
       setSubmitted(true)
@@ -44,7 +52,7 @@ export default function Contact() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/images/h3.webp" 
+            src="/images/h33.webp" 
             alt="Contact" 
             className="w-full h-full object-cover object-center" 
           />
@@ -274,6 +282,24 @@ export default function Contact() {
                   <p className="text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                     {t.contact.locationDesc}
                   </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white flex-shrink-0">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}>
+                    Email
+                  </h3>
+                  <a 
+                    href="mailto:synnovatocloe@gmail.com"
+                    className="text-base leading-relaxed text-primary hover:underline"
+                  >
+                    synnovatocloe@gmail.com
+                  </a>
                 </div>
               </div>
 

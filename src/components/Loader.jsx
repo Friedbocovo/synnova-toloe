@@ -15,8 +15,10 @@ function FallingPhoto({ src, rowIndex, photoIndex }) {
   const duration = 3 + Math.random() * 1
   const rotate = -10 + Math.random() * 20
 
-  // Détecter la préférence utilisateur pour les animations réduites
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // Détecter la préférence utilisateur pour les animations réduites (SSR-safe)
+  const prefersReducedMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false
 
   return (
     <motion.div
@@ -43,8 +45,10 @@ export default function Loader({ onDone }) {
   const [fallingPhotos, setFallingPhotos] = useState([])
   const [done, setDone] = useState(false)
 
-  // Détecter la préférence utilisateur pour les animations réduites
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // Détecter la préférence utilisateur pour les animations réduites (SSR-safe)
+  const prefersReducedMotion = typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false
 
   useEffect(() => {
     const interval = setInterval(() => {

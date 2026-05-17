@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
@@ -12,7 +12,11 @@ import Contact from './pages/Contact'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => { 
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname])
   return null
 }
 
@@ -38,12 +42,12 @@ export default function App() {
     <>
       {loading && <Loader onDone={() => setLoading(false)} />}
       {!loading && (
-        <BrowserRouter>
+        <>
           <ScrollToTop />
           <Navbar />
           <AnimatedRoutes />
           <Footer />
-        </BrowserRouter>
+        </>
       )}
     </>
   )

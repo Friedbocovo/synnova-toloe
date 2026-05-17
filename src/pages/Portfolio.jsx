@@ -7,14 +7,14 @@ import Lightbox from '../components/Lightbox'
 import { useApp } from '../context/AppContext'
 
 const gallery = [
-  // Événements: h52, h53, h54, h41
-  { src: '/images/h52.webp', cat: 'Evenements' },
-  { src: '/images/h53.webp', cat: 'Evenements' },
-  { src: '/images/h54.webp', cat: 'Evenements' },
-  { src: '/images/h41.webp', cat: 'Evenements' },
+  // Événements: 24
+  { src: '/images/24.webp', cat: 'Evenements' },
   
-  // Cinéma: 24
-  { src: '/images/24.webp', cat: 'Cinema' },
+  // Cinéma: h52, h53, h54, h41
+  { src: '/images/h52.webp', cat: 'Cinema' },
+  { src: '/images/h53.webp', cat: 'Cinema' },
+  { src: '/images/h54.webp', cat: 'Cinema' },
+  { src: '/images/h41.webp', cat: 'Cinema' },
   
   // Communication: h12, h13, 13, h44, h45, h47, 48
   { src: '/images/h12.webp', cat: 'Communication' },

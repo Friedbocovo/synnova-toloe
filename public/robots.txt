@@ -1,0 +1,10 @@
+# robots.txt for Synnova Tocloe Website
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://synnova.com/sitemap.xml
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
