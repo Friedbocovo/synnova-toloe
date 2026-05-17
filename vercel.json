@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd synnova-site && npm run build",
+  "outputDirectory": "synnova-site/dist/client",
+  "installCommand": "cd synnova-site && npm install"
+}
