@@ -40,7 +40,14 @@ export default function Portfolio() {
   const [active, setActive] = useState(0)
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
-  const filtered = active === 0 ? gallery : gallery.filter(i => catMap[i.cat] === active)
+  // Filtrer par index : 0 = Tous, 1 = Événements, 2 = Cinéma, 3 = Communication, 4 = Entrepreneuriat
+  const filtered = active === 0 ? gallery : gallery.filter(i => {
+    if (active === 1) return i.cat === 'Evenements'
+    if (active === 2) return i.cat === 'Cinema'
+    if (active === 3) return i.cat === 'Communication'
+    if (active === 4) return i.cat === 'Entrepreneuriat'
+    return false
+  })
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
   const prevPhoto = useCallback(() => setLightboxIndex(i => (i - 1 + filtered.length) % filtered.length), [filtered.length])
@@ -162,10 +169,10 @@ export default function Portfolio() {
                 />
                 {/* Overlay avec infos */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <h4 className="text-white font-bold text-base mb-1 drop-shadow-lg" style={{ fontFamily: 'Itim, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.8)', color: '#ffffff' }}>
+                  <h4 className="text-white font-bold text-base mb-1 drop-shadow-lg" style={{ fontFamily: 'Itim, cursive', color: '#ffffff' }}>
                     {item.title}
                   </h4>
-                  <p className="text-white text-sm font-semibold drop-shadow-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)', color: '#ffffff' }}>
+                  <p className="text-white text-sm font-semibold drop-shadow-lg" style={{  color: '#C2185B' }}>
                     {item.cat}
                   </p>
                 </div>
@@ -190,7 +197,7 @@ export default function Portfolio() {
           >
             <h2 
               className="text-4xl sm:text-5xl font-bold mb-4" 
-              style={{ color: 'var(--text)', fontFamily: 'Itim, cursive' }}
+              style={{ color: 'var(--text)', fontFamily: 'Itim, cursive'  }}
             >
               {t.portfolio.testimonials.title}
             </h2>
