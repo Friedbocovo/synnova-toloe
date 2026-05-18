@@ -11,10 +11,10 @@ const TikTokIcon = () => (
 )
 
 const socials = [
-  { href: 'https://facebook.com/synnovalumiere', icon: <Facebook size={20} />, label: 'Facebook', handle: 'synnovalumiere' },
-  { href: 'https://tiktok.com/@_synnova', icon: <TikTokIcon />, label: 'TikTok', handle: '@_synnova' },
+  { href: 'https://web.facebook.com/synnovalumiere?_rdc=1&_rdr#', icon: <Facebook size={20} />, label: 'Facebook', handle: 'synnovalumiere' },
+  { href: 'https://www.tiktok.com/@synnovapositiveimpact', icon: <TikTokIcon />, label: 'TikTok', handle: '@_synnova' },
   { href: 'https://instagram.com/_synnova', icon: <Instagram size={20} />, label: 'Instagram', handle: '@_synnova' },
-  { href: 'https://linkedin.com/in/synnova-tocloe', icon: <Linkedin size={20} />, label: 'LinkedIn', handle: 'Synnova Tocloe' },
+  { href: 'https://bj.linkedin.com/in/synnova-belvine-kybarance-tocloe-3882a9232', icon: <Linkedin size={20} />, label: 'LinkedIn', handle: 'Synnova Tocloe' },
 ]
 
 export default function Contact() {
@@ -192,7 +192,7 @@ export default function Contact() {
                       {f.email}
                     </label>
                     <input
-                      name="email"
+                      name="email"This
                       type="email"
                       value={form.email}
                       onChange={handleChange}
