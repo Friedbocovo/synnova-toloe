@@ -30,7 +30,7 @@ const gallery = [
   { src: '/images/h15.webp', cat: 'Entrepreneuriat' },
 ]
 
-const catMap = { 'Evenements': 2, 'Cinema': 1, 'Communication': 2, 'Entrepreneuriat': 3 }
+const catMap = { 'Evenements': 1, 'Cinema': 2, 'Communication': 3, 'Entrepreneuriat': 4 }
 
 export default function Portfolio() {
   const { t, theme } = useApp()
