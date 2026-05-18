@@ -25,7 +25,11 @@ export default function Navbar() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-gray-950/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'
+      scrolled 
+        ? theme === 'dark' 
+          ? 'bg-gray-950/95 backdrop-blur-md shadow-lg shadow-black/20' 
+          : 'bg-white/95 backdrop-blur-md shadow-lg shadow-gray-200/50'
+        : 'bg-transparent'
     }`}>
       <div className="max-w-[95%] md:max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-8 lg:gap-16 h-16 md:h-20">
@@ -64,7 +68,11 @@ export default function Navbar() {
               {/* Toggle langue */}
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-xs font-bold tracking-wider transition-all duration-200"
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all duration-200 ${
+                  theme === 'dark' 
+                    ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white' 
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950'
+                }`}
                 aria-label="Changer la langue"
               >
                 <span className="text-base">{lang === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
@@ -74,7 +82,11 @@ export default function Navbar() {
               {/* Toggle thème */}
               <button
                 onClick={toggleTheme}
-                className="w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition-all duration-200"
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  theme === 'dark' 
+                    ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white' 
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950'
+                }`}
                 aria-label="Changer le thème"
               >
                 {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
@@ -89,12 +101,20 @@ export default function Navbar() {
           {/* Mobile right */}
           <div className="md:hidden flex items-center gap-2">
             <button onClick={toggleLang}
-              className="px-2 py-1 rounded-full bg-gray-800 text-gray-300 text-xs font-bold"
+              className={`px-2 py-1 rounded-full text-xs font-bold ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 text-gray-300' 
+                  : 'bg-gray-200 text-gray-800'
+              }`}
               aria-label="Langue">
               {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             <button onClick={toggleTheme}
-              className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300"
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 text-gray-300' 
+                  : 'bg-gray-200 text-gray-800'
+              }`}
               aria-label="Thème">
               {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
             </button>
@@ -127,7 +147,11 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-950/98 backdrop-blur-md border-t border-gray-800"
+            className={`md:hidden backdrop-blur-md border-t ${
+              theme === 'dark' 
+                ? 'bg-gray-950/98 border-gray-800' 
+                : 'bg-white/98 border-gray-200'
+            }`}
           >
             <nav className="flex flex-col px-4 py-4 gap-1">
               {links.map(({ to, label }) => (

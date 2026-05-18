@@ -23,7 +23,6 @@ const gallery = [
   { src: '/images/h44.webp', cat: 'Communication' },
   { src: '/images/h45.webp', cat: 'Communication' },
   { src: '/images/h47.webp', cat: 'Communication' },
-  { src: '/images/48.webp', cat: 'Communication' },
   
   // Entrepreneuriat: h14, h15
   { src: '/images/h14.webp', cat: 'Entrepreneuriat' },
@@ -205,9 +204,20 @@ export default function Portfolio() {
                 <p className="text-base leading-relaxed mb-6 italic" style={{ color: 'var(--text-muted)' }}>
                   {item.text}
                 </p>
-                <div className="pt-4 border-t" style={{ borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}>
-                  <p className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{item.author}</p>
-                  <p className="text-xs mt-1 text-primary">{item.role}</p>
+                <div className="pt-4 border-t flex items-center gap-4" style={{ borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}>
+                  {/* Avatar */}
+                  <div 
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    style={{ 
+                      background: 'linear-gradient(135deg, #C2185B 0%, #9C27B0 100%)'
+                    }}
+                  >
+                    {item.author.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{item.author}</p>
+                    <p className="text-xs mt-1 text-primary">{item.role}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
