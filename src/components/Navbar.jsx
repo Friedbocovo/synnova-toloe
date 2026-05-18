@@ -8,6 +8,12 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { t, lang, theme, toggleLang, toggleTheme } = useApp()
+  const location = window.location.pathname
+
+  // Sur la page d'accueil en thème blanc, les liens doivent être sombres
+  // Sur les autres pages avec hero sombre, les liens doivent être blancs jusqu'au scroll
+  const isHomePage = location === '/'
+  const shouldUseDarkText = theme === 'light' && (scrolled || isHomePage)
 
   const links = [
     { to: '/', label: t.nav.home },
@@ -48,7 +54,11 @@ export default function Navbar() {
                 end={to === '/'}
                 className={({ isActive }) =>
                   `text-sm font-medium tracking-wide transition-colors duration-200 relative group ${
-                    isActive ? 'text-primary' : theme === 'light' ? 'text-gray-800 hover:text-gray-950' : 'text-gray-300 hover:text-white'
+                    isActive 
+                      ? 'text-primary' 
+                      : shouldUseDarkText
+                        ? 'text-gray-800 hover:text-gray-950' 
+                        : 'text-white hover:text-gray-200'
                   }`
                 }
               >
@@ -69,9 +79,9 @@ export default function Navbar() {
               <button
                 onClick={toggleLang}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all duration-200 ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white' 
-                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950'
+                  shouldUseDarkText
+                    ? 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950' 
+                    : 'bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm'
                 }`}
                 aria-label="Changer la langue"
               >
@@ -83,9 +93,9 @@ export default function Navbar() {
               <button
                 onClick={toggleTheme}
                 className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white' 
-                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950'
+                  shouldUseDarkText
+                    ? 'bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-950' 
+                    : 'bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm'
                 }`}
                 aria-label="Changer le thème"
               >
@@ -102,18 +112,18 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-2">
             <button onClick={toggleLang}
               className={`px-2 py-1 rounded-full text-xs font-bold ${
-                theme === 'dark' 
-                  ? 'bg-gray-800 text-gray-300' 
-                  : 'bg-gray-200 text-gray-800'
+                shouldUseDarkText
+                  ? 'bg-gray-200 text-gray-800' 
+                  : 'bg-white/20 text-white backdrop-blur-sm'
               }`}
               aria-label="Langue">
               {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             <button onClick={toggleTheme}
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                theme === 'dark' 
-                  ? 'bg-gray-800 text-gray-300' 
-                  : 'bg-gray-200 text-gray-800'
+                shouldUseDarkText
+                  ? 'bg-gray-200 text-gray-800' 
+                  : 'bg-white/20 text-white backdrop-blur-sm'
               }`}
               aria-label="Thème">
               {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
