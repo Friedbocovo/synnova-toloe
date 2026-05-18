@@ -349,7 +349,4 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Force white color for About page story titles */
-.about-story-title {
-  color: #ffffff !important;
-}
+

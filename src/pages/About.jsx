@@ -187,8 +187,8 @@ export default function About() {
                   </motion.div>
 
                   <h2 
-                    className="about-story-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white" 
-                    style={{ fontFamily: 'Itim, cursive' }}
+                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight" 
+                    style={{ fontFamily: 'Itim, cursive', color: theme === 'light' ? '#111827' : '#ffffff' }}
                   >
                     {item.title}
                   </h2>
