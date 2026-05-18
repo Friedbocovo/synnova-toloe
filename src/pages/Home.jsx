@@ -56,7 +56,7 @@ export default function Home() {
         </div>
 
         {/* Contenu texte */}
-        <div className={`relative w-full md:max-w-[75%] mx-auto px-8 sm:px-12 lg:px-2 ${theme === 'light' ? 'md:py-32 py-8' : 'py-32 md:translate-y-0 translate-y-[160px]'} flex justify-start`}>
+        <div className={`relative w-full md:max-w-[75%] mx-auto px-8 sm:px-12 lg:px-2 ${theme === 'light' ? 'md:py-32 py-8' : 'py-32 md:translate-y-0 translate-y-[155px]'} flex justify-start`}>
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
             className={`max-w-xl w-full lg:w-1/2 ${theme === 'light' ? 'md:bg-transparent md:backdrop-blur-none md:p-0' : 'md:bg-transparent bg-black/40 md:backdrop-blur-none backdrop-blur-sm md:p-0 p-6 rounded-2xl'}`}>
 
