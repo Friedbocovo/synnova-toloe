@@ -156,14 +156,13 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Gallery Grid - Masonry Layout */}
-          <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4 mx-auto max-w-[1600px]">
+          <div key={active} className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4 mx-auto max-w-[1600px]">
             {filtered.map((item, i) => (
               <motion.div
                 key={item.src}
                 initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: i * 0.02 }}
-                viewport={{ once: true }}
                 className="break-inside-avoid cursor-pointer group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 mb-4"
                 onClick={() => setLightboxIndex(i)}
               >
