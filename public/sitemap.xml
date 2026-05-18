@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
   <url>
-    <loc>https://synnova.com/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://synnova-toloe.vercel.app/</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- About Page -->
   <url>
-    <loc>https://synnova.com/about</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://synnova-toloe.vercel.app/about</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Univers Page -->
   <url>
-    <loc>https://synnova.com/univers</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://synnova-toloe.vercel.app/univers</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Portfolio Page -->
   <url>
-    <loc>https://synnova.com/portfolio</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://synnova-toloe.vercel.app/portfolio</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Contact Page -->
   <url>
-    <loc>https://synnova.com/contact</loc>
-    <lastmod>2026-05-17</lastmod>
+    <loc>https://synnova-toloe.vercel.app/contact</loc>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
