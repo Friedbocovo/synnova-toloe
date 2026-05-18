@@ -60,7 +60,7 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
           />
           
           {/* Photo Info */}
-          {typeof currentPhoto === 'object' && (currentPhoto.title || currentPhoto.category || currentPhoto.description) && (
+          {typeof currentPhoto === 'object' && (currentPhoto.title || currentPhoto.cat || currentPhoto.description) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -68,17 +68,17 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
               className="mt-6 text-center max-w-2xl px-4"
             >
               {currentPhoto.title && (
-                <h3 className="text-white text-2xl font-bold mb-2" style={{ fontFamily: 'Itim, cursive' }}>
+                <h3 className="text-2xl md:text-3xl font-bold mb-3" style={{ fontFamily: 'Itim, cursive', color: '#ffffff' }}>
                   {currentPhoto.title}
                 </h3>
               )}
-              {currentPhoto.category && (
-                <p className="text-primary text-sm font-semibold mb-2">
-                  {currentPhoto.category}
+              {currentPhoto.cat && (
+                <p className="text-base font-semibold mb-2" style={{ color: '#C2185B' }}>
+                  {currentPhoto.cat}
                 </p>
               )}
               {currentPhoto.description && (
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                   {currentPhoto.description}
                 </p>
               )}
