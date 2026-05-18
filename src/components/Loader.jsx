@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const PHOTOS = [
   '/images/1.webp', '/images/3.webp', '/images/5.webp', '/images/7.webp',
-  '/images/9.webp', '/images/11.webp', '/images/13.webp', '/images/15.webp',
+  '/images/8.webp', '/images/11.webp', '/images/13.webp', '/images/15.webp',
   '/images/17.webp', '/images/19.webp', '/images/21.webp', '/images/23.webp',
   '/images/25.webp', '/images/27.webp', '/images/29.webp',
 ]
