@@ -156,11 +156,19 @@ export default function Portfolio() {
               >
                 <img 
                   src={item.src} 
-                  alt="Synnova Portfolio" 
+                  alt={item.title || "Synnova Portfolio"} 
                   className="w-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   loading="lazy" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Overlay avec infos */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  <h4 className="text-white font-bold text-sm mb-1" style={{ fontFamily: 'Itim, cursive' }}>
+                    {item.title}
+                  </h4>
+                  <p className="text-primary text-xs font-semibold">
+                    {item.cat}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
