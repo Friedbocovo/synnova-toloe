@@ -10,10 +10,12 @@ export default function Navbar() {
   const { t, lang, theme, toggleLang, toggleTheme } = useApp()
   const location = window.location.pathname
 
-  // Sur la page d'accueil en thème blanc, les liens doivent être sombres
-  // Sur les autres pages avec hero sombre, les liens doivent être blancs jusqu'au scroll
+  // Règle : 
+  // - Page d'accueil + thème blanc = liens noirs
+  // - Toutes les autres pages = liens blancs (thème dark ET light)
+  // - Page d'accueil + thème dark = liens blancs
   const isHomePage = location === '/'
-  const shouldUseDarkText = theme === 'light' && (scrolled || isHomePage)
+  const shouldUseDarkText = isHomePage && theme === 'light' && scrolled
 
   const links = [
     { to: '/', label: t.nav.home },
