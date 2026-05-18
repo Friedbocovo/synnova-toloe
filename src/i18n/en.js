@@ -66,7 +66,7 @@ export default {
   },
   portfolio: {
     badge: 'Portfolio & Gallery', title: 'My Work',
-    intro: '35 photos · Events, cinema, communication, entrepreneurship — a trace of every adventure.',
+    intro: 'Events, cinema, communication, entrepreneurship — a trace of every adventure.',
     filters: ['All', 'Events', 'Cinema', 'Communication', 'Entrepreneurship'],
     testimonials: {
       title: 'What they say',
@@ -88,7 +88,7 @@ export default {
       types: ['Event hosting', 'Cinema collaboration', 'Digital communication', 'Biodegradable packaging', 'Partnership', 'Other'],
     },
     social: 'Follow my daily life', location: 'Grand-Popo, Benin',
-    locationDesc: 'Synnova is based in Grand-Popo and works across Benin and beyond.',
+    locationDesc: 'I am based in Grand-Popo and works across Benin and beyond.',
   },
   footer: {
     desc: 'Host · Communicator · Actress · Social Entrepreneur.',

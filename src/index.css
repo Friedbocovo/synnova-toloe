@@ -95,9 +95,6 @@ html.light .text-gray-300,
 html.light .text-gray-200 {
   color: var(--text-muted) !important;
 }
-html.light .text-white {
-  color: var(--text) !important;
-}
 html.light .border-gray-800,
 html.light .border-gray-700 {
   border-color: var(--border) !important;
@@ -237,15 +234,7 @@ html.light .bg-gray-800 {
   background-color: var(--bg-card2) !important;
 }
 /* Textes */
-html.light .text-gray-400,
-html.light .text-gray-300,
-html.light .text-gray-200,
-html.light .text-gray-500 {
-  color: var(--text-muted) !important;
-}
-html.light .text-white {
-  color: var(--text) !important;
-}
+/* Removed global text color override to allow navbar links to control their own colors */
 html.light .text-gray-600 {
   color: var(--text-muted) !important;
 }
@@ -283,6 +272,10 @@ html.light .btn-outline {
 }
 html.light .btn-outline:hover {
   background-color: #C2185B !important;
+  color: white !important;
+}
+/* Bouton primary - texte toujours blanc */
+html.light .btn-primary {
   color: white !important;
 }
 /* Bouton outline blanc sur mobile */

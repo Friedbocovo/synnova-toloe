@@ -32,8 +32,6 @@ const gallery = [
   { src: '/images/h15.webp', cat: 'Entrepreneuriat', title: 'Entrepreneuriat Social', description: 'Projet d\'entrepreneuriat pour un Bénin plus vert' },
 ]
 
-const catMap = { 'Evenements': 1, 'Cinema': 2, 'Communication': 3, 'Entrepreneuriat': 4 }
-
 export default function Portfolio() {
   const { t, theme } = useApp()
   const filters = t.portfolio.filters
@@ -49,9 +47,17 @@ export default function Portfolio() {
     return false
   })
 
+  console.log('Active filter:', active, 'Filtered count:', filtered.length)
+
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
-  const prevPhoto = useCallback(() => setLightboxIndex(i => (i - 1 + filtered.length) % filtered.length), [filtered.length])
-  const nextPhoto = useCallback(() => setLightboxIndex(i => (i + 1) % filtered.length), [filtered.length])
+  const prevPhoto = useCallback(() => {
+    if (filtered.length === 0) return
+    setLightboxIndex(i => (i - 1 + filtered.length) % filtered.length)
+  }, [filtered.length])
+  const nextPhoto = useCallback(() => {
+    if (filtered.length === 0) return
+    setLightboxIndex(i => (i + 1) % filtered.length)
+  }, [filtered.length])
 
   return (
     <PageWrapper>

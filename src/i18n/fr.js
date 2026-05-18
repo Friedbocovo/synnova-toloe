@@ -89,7 +89,7 @@ export default {
   portfolio: {
     badge: 'Portfolio & Galerie',
     title: 'Mes Réalisations',
-    intro: '35 photos · Événements, cinéma, communication, entrepreneuriat — une trace de chaque aventure.',
+    intro: 'Événements, cinéma, communication, entrepreneuriat — une trace de chaque aventure.',
     filters: ['Tous', 'Événements', 'Cinéma', 'Communication', 'Entrepreneuriat'],
     testimonials: {
       title: 'Ils parlent de moi',
@@ -113,7 +113,7 @@ export default {
       types: ["Animation d'événement", 'Collaboration cinéma', 'Communication digitale', 'Emballages biodégradables', 'Partenariat', 'Autre'],
     },
     social: 'Suivez mon quotidien', location: 'Grand-Popo, Bénin',
-    locationDesc: "Synnova est basée à Grand-Popo et intervient sur tout le territoire béninois et au-delà.",
+    locationDesc: "Je est basée à Grand-Popo et intervient sur tout le territoire béninois et au-delà.",
   },
   footer: {
     desc: 'Animatrice · Communicatrice · Actrice · Entrepreneuse sociale.',

@@ -11,11 +11,11 @@ export default function Navbar() {
   const location = window.location.pathname
 
   // Règle : 
-  // - Page d'accueil + thème blanc = liens noirs
-  // - Toutes les autres pages = liens blancs (thème dark ET light)
-  // - Page d'accueil + thème dark = liens blancs
+  // - Page d'accueil + thème blanc = liens NOIRS (avant ET après scroll)
+  // - Toutes les autres pages = liens BLANCS (thème dark ET light)
+  // - Page d'accueil + thème dark = liens BLANCS
   const isHomePage = location === '/'
-  const shouldUseDarkText = isHomePage && theme === 'light' && scrolled
+  const shouldUseDarkText = isHomePage && theme === 'light'
 
   const links = [
     { to: '/', label: t.nav.home },
