@@ -8,13 +8,13 @@ import { useApp } from '../context/AppContext'
 
 const gallery = [
   // Événements: 24
-  { src: '/images/24.webp', cat: 'Evenements' },
+  { src: '/images/24.webp', cat: 'Cinema' },
   
   // Cinéma: h52, h53, h54, h41
-  { src: '/images/h52.webp', cat: 'Cinema' },
-  { src: '/images/h53.webp', cat: 'Cinema' },
-  { src: '/images/h54.webp', cat: 'Cinema' },
-  { src: '/images/h41.webp', cat: 'Cinema' },
+  { src: '/images/h52.webp', cat: 'Evenements' },
+  { src: '/images/h53.webp', cat: 'Evenements' },
+  { src: '/images/h54.webp', cat: 'Evenements' },
+  { src: '/images/h41.webp', cat: 'Evenements' },
   
   // Communication: h12, h13, 13, h44, h45, h47, 48
   { src: '/images/h12.webp', cat: 'Communication' },
@@ -141,8 +141,8 @@ export default function Portfolio() {
             ))}
           </motion.div>
 
-          {/* Gallery Grid - Masonry Layout */}
-          <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
+          {/* Gallery Grid - Centered Grid Layout */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
             {filtered.map((item, i) => (
               <motion.div
                 key={item.src}
@@ -150,13 +150,13 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: i * 0.02 }}
                 viewport={{ once: true }}
-                className="break-inside-avoid cursor-pointer group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="w-full cursor-pointer group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
                 onClick={() => setLightboxIndex(i)}
               >
                 <img 
                   src={item.src} 
                   alt="Synnova Portfolio" 
-                  className="w-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   loading="lazy" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
