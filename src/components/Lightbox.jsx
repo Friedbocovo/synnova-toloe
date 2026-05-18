@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
+  const currentPhoto = photos[index]
+  
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'Escape') onClose()
@@ -44,17 +46,45 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
           <ChevronLeft size={28} />
         </button>
 
-        {/* Image */}
-        <motion.img
-          key={index}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.25 }}
-          src={photos[index]}
-          alt={`Synnova - photo ${index + 1}`}
-          className="max-h-[85vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
-          onClick={(e) => e.stopPropagation()}
-        />
+        {/* Content Container */}
+        <div className="flex flex-col items-center max-w-7xl w-full" onClick={(e) => e.stopPropagation()}>
+          {/* Image */}
+          <motion.img
+            key={index}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25 }}
+            src={typeof currentPhoto === 'string' ? currentPhoto : currentPhoto.src}
+            alt={typeof currentPhoto === 'string' ? `Synnova - photo ${index + 1}` : currentPhoto.title || `Synnova - photo ${index + 1}`}
+            className="max-h-[70vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
+          />
+          
+          {/* Photo Info */}
+          {typeof currentPhoto === 'object' && (currentPhoto.title || currentPhoto.category || currentPhoto.description) && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 text-center max-w-2xl px-4"
+            >
+              {currentPhoto.title && (
+                <h3 className="text-white text-2xl font-bold mb-2" style={{ fontFamily: 'Itim, cursive' }}>
+                  {currentPhoto.title}
+                </h3>
+              )}
+              {currentPhoto.category && (
+                <p className="text-primary text-sm font-semibold mb-2">
+                  {currentPhoto.category}
+                </p>
+              )}
+              {currentPhoto.description && (
+                <p className="text-white/70 text-sm leading-relaxed">
+                  {currentPhoto.description}
+                </p>
+              )}
+            </motion.div>
+          )}
+        </div>
 
         {/* Next */}
         <button

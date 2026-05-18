@@ -7,26 +7,29 @@ import Lightbox from '../components/Lightbox'
 import { useApp } from '../context/AppContext'
 
 const gallery = [
-  // Événements: 24
-  { src: '/images/24.webp', cat: 'Cinema' },
+  // Cinéma
+  { src: '/images/24.webp', cat: 'Cinema', title: 'Production Cinéma', description: 'Sur le plateau en tant que régisseuse' },
+  { src: '/images/26.webp', cat: 'Cinema', title: 'Tournage', description: 'Coordination technique sur un projet audiovisuel' },
   
-  // Cinéma: h52, h53, h54, h41
-  { src: '/images/h52.webp', cat: 'Evenements' },
-  { src: '/images/h53.webp', cat: 'Evenements' },
-  { src: '/images/h54.webp', cat: 'Evenements' },
-  { src: '/images/h41.webp', cat: 'Evenements' },
+  // Événements
+  { src: '/images/h52.webp', cat: 'Evenements', title: 'Animation Événement', description: 'Maîtresse de cérémonie lors d\'un événement culturel' },
+  { src: '/images/h53.webp', cat: 'Evenements', title: 'Festival des Arts', description: 'Animation au Festival International des Arts du Bénin' },
+  { src: '/images/h54.webp', cat: 'Evenements', title: 'Événement Live', description: 'Présentation d\'un événement en direct' },
+  { src: '/images/h41.webp', cat: 'Evenements', title: 'Cérémonie Officielle', description: 'Animation d\'une cérémonie institutionnelle' },
+  { src: '/images/h28.webp', cat: 'Evenements', title: 'Événement Culturel', description: 'Animation d\'un événement culturel à Grand-Popo' },
+  { src: '/images/h29.webp', cat: 'Evenements', title: 'Conférence', description: 'Modération d\'une conférence' },
   
-  // Communication: h12, h13, 13, h44, h45, h47, 48
-  { src: '/images/h12.webp', cat: 'Communication' },
-  { src: '/images/h13.webp', cat: 'Communication' },
-  { src: '/images/13.webp', cat: 'Communication' },
-  { src: '/images/h44.webp', cat: 'Communication' },
-  { src: '/images/h45.webp', cat: 'Communication' },
-  { src: '/images/h47.webp', cat: 'Communication' },
+  // Communication
+  { src: '/images/h12.webp', cat: 'Communication', title: 'Campagne Digitale', description: 'Création de contenu pour les réseaux sociaux' },
+  { src: '/images/h13.webp', cat: 'Communication', title: 'Stratégie Communication', description: 'Développement de stratégie de communication digitale' },
+  { src: '/images/13.webp', cat: 'Communication', title: 'Production Contenu', description: 'Création de contenu visuel pour campagne' },
+  { src: '/images/h44.webp', cat: 'Communication', title: 'Communication Visuelle', description: 'Shooting pour campagne de communication' },
+  { src: '/images/h45.webp', cat: 'Communication', title: 'Réseaux Sociaux', description: 'Contenu pour engagement communautaire' },
+  { src: '/images/h47.webp', cat: 'Communication', title: 'Campagne Institutionnelle', description: 'Communication pour partenaire institutionnel' },
   
-  // Entrepreneuriat: h14, h15
-  { src: '/images/h14.webp', cat: 'Entrepreneuriat' },
-  { src: '/images/h15.webp', cat: 'Entrepreneuriat' },
+  // Entrepreneuriat
+  { src: '/images/h14.webp', cat: 'Entrepreneuriat', title: 'Emballages Biodégradables', description: 'Production d\'emballages éco-responsables' },
+  { src: '/images/h15.webp', cat: 'Entrepreneuriat', title: 'Entrepreneuriat Social', description: 'Projet d\'entrepreneuriat pour un Bénin plus vert' },
 ]
 
 const catMap = { 'Evenements': 1, 'Cinema': 2, 'Communication': 3, 'Entrepreneuriat': 4 }
@@ -38,11 +41,10 @@ export default function Portfolio() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   const filtered = active === 0 ? gallery : gallery.filter(i => catMap[i.cat] === active)
-  const filteredSrcs = filtered.map(i => i.src)
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
-  const prevPhoto = useCallback(() => setLightboxIndex(i => (i - 1 + filteredSrcs.length) % filteredSrcs.length), [filteredSrcs.length])
-  const nextPhoto = useCallback(() => setLightboxIndex(i => (i + 1) % filteredSrcs.length), [filteredSrcs.length])
+  const prevPhoto = useCallback(() => setLightboxIndex(i => (i - 1 + filtered.length) % filtered.length), [filtered.length])
+  const nextPhoto = useCallback(() => setLightboxIndex(i => (i + 1) % filtered.length), [filtered.length])
 
   return (
     <PageWrapper>
@@ -281,7 +283,7 @@ export default function Portfolio() {
 
       {lightboxIndex !== null && (
         <Lightbox 
-          photos={filteredSrcs} 
+          photos={filtered} 
           index={lightboxIndex} 
           onClose={closeLightbox} 
           onPrev={prevPhoto} 
