@@ -161,11 +161,11 @@ export default function Portfolio() {
                   loading="lazy" 
                 />
                 {/* Overlay avec infos */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <h4 className="text-white font-bold text-sm mb-1" style={{ fontFamily: 'Itim, cursive' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  <h4 className="text-white font-bold text-base mb-1 drop-shadow-lg" style={{ fontFamily: 'Itim, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
                     {item.title}
                   </h4>
-                  <p className="text-primary text-xs font-semibold">
+                  <p className="text-primary text-sm font-semibold drop-shadow-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                     {item.cat}
                   </p>
                 </div>
